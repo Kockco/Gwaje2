@@ -5,6 +5,9 @@ using UnityEngine;
 public class NPCAttack : NPCFSMState
 {
 
+    public float AttackTime = 3.0f;
+    private float time = 0.0f;
+    
     public override void BeginState()
     {
         base.BeginState();
@@ -21,6 +24,11 @@ public class NPCAttack : NPCFSMState
         {
             _manager.SetState(NPCState.Run);
             return;
+        }
+        time += Time.deltaTime;
+        if (time > AttackTime)
+        {
+            _manager.SetState(NPCState.Skill);
         }
 
     }
